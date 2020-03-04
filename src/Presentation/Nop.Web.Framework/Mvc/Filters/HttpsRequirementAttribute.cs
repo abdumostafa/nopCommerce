@@ -88,7 +88,7 @@ namespace Nop.Web.Framework.Mvc.Filters
                 var currentConnectionSecured = _webHelper.IsCurrentConnectionSecured();
 
                 //page should be secured, so redirect (permanent) to HTTPS version of page
-                if (useSsl && !currentConnectionSecured && _storeContext.CurrentStore.SslEnabled)
+                if (useSsl && !currentConnectionSecured)
                     filterContext.Result = new RedirectResult(_webHelper.GetThisPageUrl(true, true), true);
 
                 //page shouldn't be secured, so redirect (permanent) to HTTP version of page
@@ -127,7 +127,7 @@ namespace Nop.Web.Framework.Mvc.Filters
                 var sslRequirement = actionFilter?.SslRequirement ?? _sslRequirement;
 
                 //whether all pages will be forced to use SSL no matter of the passed value
-                if (_securitySettings.ForceSslForAllPages)
+                if (_storeContext.CurrentStore.SslEnabled)
                     sslRequirement = SslRequirement.Yes;
 
                 switch (sslRequirement)

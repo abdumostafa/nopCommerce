@@ -325,6 +325,12 @@ set @resources='
   <LocaleResource Name="Admin.Orders.Shipments.List.County.Hint">
     <Value>Search by a specific county / region.</Value>
   </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.ForceSslForAllPages">
+    <Value></Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.Configuration.Settings.GeneralCommon.ForceSslForAllPages.Hint">
+    <Value></Value>
+  </LocaleResource>
 </Language>
 '
 
@@ -1489,4 +1495,9 @@ BEGIN
     INSERT [Setting] ([Name], [Value], [StoreId])
     VALUES (N'customersettings.lastactivityminutes', '15', 0)
 END
+GO
+
+--delete setting
+DELETE FROM [Setting]
+WHERE [Name] = N'securitysettings.forcesslforallpages'
 GO
